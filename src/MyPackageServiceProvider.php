@@ -15,8 +15,8 @@ class :uc:packageServiceProvider extends ServiceProvider
     {
         // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', ':lc:vendor');
         // $this->loadViewsFrom(__DIR__.'/../resources/views', ':lc:vendor');
-        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        // $this->loadRoutesFrom(__DIR__.'/routes.php');
+        // $this->loadViewComponentsAs(':lc:vendor', [Alert::class]);
+        // $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
 
         // Publishing is only necessary when using the CLI.
         if ($this->app->runningInConsole()) {
@@ -61,10 +61,23 @@ class :uc:packageServiceProvider extends ServiceProvider
             __DIR__.'/../config/:lc:package.php' => config_path(':lc:package.php'),
         ], ':lc:package.config');
 
+        // Publishing the migrations.
+        /*if (! class_exists('Create:uc:packageTable')) {
+            $this->publishes([
+            __DIR__ . '/../database/migrations/create_:lc:package_table.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_:lc:package_table.php'),
+            // you can add any number of migrations here
+            ], 'migrations');
+        }*/
+
         // Publishing the views.
         /*$this->publishes([
-            __DIR__.'/../resources/views' => base_path('resources/views/vendor/:lc:vendor'),
+            __DIR__.'/../resources/views' => resource_path('views/vendor/:lc:vendor'),
         ], ':lc:package.views');*/
+
+        // Publishing view components.
+        // $this->publishes([
+        //     __DIR__.'/../src/Components/' => app_path('View/Components'),
+        // ], ':lc:package.view-components');        
 
         // Publishing assets.
         /*$this->publishes([
